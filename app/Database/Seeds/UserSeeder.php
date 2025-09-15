@@ -12,7 +12,8 @@ class UserSeeder extends Seeder
 		$now = date('Y-m-d H:i:s');
 
 		$users = [
-			[ 'name' => 'System Administrator', 'email' => 'admin@example.com', 'role' => 'sys_admin', 'password' => 'admin123' ],
+			[ 'name' => 'AYTI Administrator', 'email' => 'ayti@example.com', 'role' => 'sys_admin', 'password' => 'ayti123' ],
+			[ 'name' => 'System Administrator', 'email' => 'admin@example.com', 'role' => 'central_admin', 'password' => 'admin123' ],
 			[ 'name' => 'Central Office Admin', 'email' => 'central@example.com', 'role' => 'central_admin', 'password' => 'central123' ],
 			[ 'name' => 'Branch Manager', 'email' => 'branch@example.com', 'role' => 'branch_manager', 'password' => 'branch123' ],
 			[ 'name' => 'Inventory Staff', 'email' => 'inventory@example.com', 'role' => 'inventory_staff', 'password' => 'inventory123' ],
@@ -24,6 +25,12 @@ class UserSeeder extends Seeder
 		foreach ($users as $u) {
 			$exists = $builder->where('email', $u['email'])->get()->getFirstRow();
 			if ($exists) {
+				$builder->where('email', $u['email'])->update([
+					'name' => $u['name'],
+					'password_hash' => password_hash($u['password'], PASSWORD_DEFAULT),
+					'role' => $u['role'],
+					'updated_at' => $now,
+				]);
 				continue;
 			}
 			$builder->insert([

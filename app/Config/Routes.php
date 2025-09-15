@@ -20,6 +20,13 @@ $routes->group('it', ['filter' => 'adminauth'], static function($routes) {
     $routes->get('system-logs', 'IT\\SystemLogs::index');
 });
 
+// Inventory Staff Routes
+$routes->group('inventory', ['filter' => 'roleguard:inventory_staff'], static function($routes) {
+    $routes->get('dashboard', 'Inventory\\Dashboard::index');
+    $routes->get('items', 'Inventory\\Items::index');
+    $routes->match(['get','post'], 'items/search', 'Inventory\\Items::search');
+});
+
 $routes->group('admin', ['filter' => 'adminauth'], static function($routes) {
 	// Dashboard
 	$routes->get('dashboard', 'Admin\\Dashboard::index');

@@ -10,8 +10,20 @@ class Auth extends BaseController
 	public function login()
 	{
 		$session = session();
-		if ($session->get('isLoggedIn') && $session->get('role') === 'admin') {
-			return redirect()->to('admin/dashboard');
+		if ($session->get('isLoggedIn')) {
+			$role = $session->get('role');
+			if ($role === 'sys_admin') {
+				return redirect()->to('it/dashboard');
+			}
+			if (in_array($role, Roles::adminRoles(), true)) {
+				return redirect()->to('admin/dashboard');
+			}
+			if ($role === 'inventory_staff') {
+				return redirect()->to('inventory/dashboard');
+			}
+			if ($role === 'supplier') {
+				return redirect()->to('supplier/dashboard');
+			}
 		}
 		return view('auth/login', [
 			'error' => $session->getFlashdata('error'),
@@ -66,6 +78,8 @@ class Auth extends BaseController
 			return redirect()->to('it/dashboard');
 		} elseif (in_array($role, Roles::adminRoles(), true)) {
 			return redirect()->to('admin/dashboard');
+		} elseif ($role === 'inventory_staff') {
+			return redirect()->to('inventory/dashboard');
 		} elseif ($role === 'supplier') {
 			return redirect()->to('supplier/dashboard');
 		} else {
