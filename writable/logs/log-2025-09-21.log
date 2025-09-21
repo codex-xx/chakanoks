@@ -1,0 +1,16 @@
+ERROR - 2025-09-21 04:39:59 --> mysqli_sql_exception: Table 'chakanoks.users' doesn't exist in E:\xampp\htdocs\CHAKANOKS\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 E:\xampp\htdocs\CHAKANOKS\system\Database\MySQLi\Connection.php(327): mysqli->query('ALTER TABLE `us...', 0)
+#1 E:\xampp\htdocs\CHAKANOKS\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('ALTER TABLE `us...')
+#2 E:\xampp\htdocs\CHAKANOKS\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('ALTER TABLE `us...')
+#3 E:\xampp\htdocs\CHAKANOKS\system\Database\Forge.php(772): CodeIgniter\Database\BaseConnection->query('ALTER TABLE `us...')
+#4 E:\xampp\htdocs\CHAKANOKS\app\Database\Migrations\2025-01-20-000001_AddCompanyNameToUsers.php(13): CodeIgniter\Database\Forge->addColumn('users', Array)
+#5 E:\xampp\htdocs\CHAKANOKS\system\Database\MigrationRunner.php(876): App\Database\Migrations\AddCompanyNameToUsers->up()
+#6 E:\xampp\htdocs\CHAKANOKS\system\Database\MigrationRunner.php(182): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+#7 E:\xampp\htdocs\CHAKANOKS\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 E:\xampp\htdocs\CHAKANOKS\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 E:\xampp\htdocs\CHAKANOKS\system\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 E:\xampp\htdocs\CHAKANOKS\system\Boot.php(388): CodeIgniter\CLI\Console->run()
+#11 E:\xampp\htdocs\CHAKANOKS\system\Boot.php(133): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#12 E:\xampp\htdocs\CHAKANOKS\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#13 {main}
